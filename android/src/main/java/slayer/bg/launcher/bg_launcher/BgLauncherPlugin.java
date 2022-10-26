@@ -31,7 +31,8 @@ public class BgLauncherPlugin implements FlutterPlugin, MethodCallHandler {
         if (call.method.equals("bringAppToForeground")) {
             String action = call.argument("action");
             Map<String, String> extras = call.argument("extras");
-            Intent bgLauncherIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+            String packageName = extras.get("packageName");
+            Intent bgLauncherIntent = context.getPackageManager().getLaunchIntentForPackage(packageName); // context.getPackageName()
             if (extras != null && !extras.isEmpty()) {
                 for (Map.Entry<String, String> entry : extras.entrySet()) {
                     bgLauncherIntent.putExtra(entry.getKey(), entry.getValue());
